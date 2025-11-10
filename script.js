@@ -1,5 +1,18 @@
-const libraryContainer = document.querySelector(".library-container");
 const myLibrary = [];
+
+const libraryContainer = document.querySelector(".library-container");
+
+const showBookFormBtn = document.getElementById("show-form-button");
+const closeBookFormBtn = document.getElementById("close-form-button");
+const dialog = document.getElementById("form-dialog-popup");
+
+showBookFormBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeBookFormBtn.addEventListener("click", () => {
+    dialog.close();
+})
 
 function Book(title,author,pages,status){
     if(!new.target) {
@@ -11,10 +24,6 @@ function Book(title,author,pages,status){
     this.pages = pages;
     this.status = status;
     this.id = crypto.randomUUID();
-
-    this.bookInfo = function() {
-        return `${this.title} by ${this.author}, ${this.pages} pages (${this.situation})`;
-    };
 }
 
 function addBookToLibrary(book) {
@@ -50,7 +59,7 @@ function displayLibrary(){
         // status
         const bookStatus = document.createElement("p");
         bookStatus.classList.add("book-status");
-        bookStatus.textContent = book.situation;
+        bookStatus.textContent = book.status;
         bookDiv.appendChild(bookStatus);
 
         // id
@@ -63,8 +72,8 @@ function displayLibrary(){
     });
 }
 
-const book1 = new Book("The Silent Ocean", "Maria Lopes", 250, "reading");
-const book2 = new Book("Into the Code", "Arthur Mendes", 180, "finished");
+const book1 = new Book("The Silent Ocean", "Maria Lopes", 250, "read");
+const book2 = new Book("Into the Code", "Arthur Mendes", 180, "not read yet");
 const book3 = new Book("Echoes of Tomorrow", "Lívia Souza", 320, "not read yet");
 
 addBookToLibrary(book1);

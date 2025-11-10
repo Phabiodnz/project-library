@@ -8,16 +8,28 @@
 </head>
 <body>
     <script src="script.js" defer></script>
-    <div class="library-container">
-        <div class="book-card">
-            <p class="book-title">TITLE</p>
-            <p class="book-author">AUTHOR</p>
-            <p class="book-pages">PAGES</p>
-            <p class="book-status">STATUS</p>
-            <p class="book-id">ID</p>
-        </div>
-    </div>
 
+    <section class="middle-section">
+        
+        <div class="library-container">
+        </div>
+
+        <button id="show-form-button">ADD BOOK</button>
+
+        <dialog id="form-dialog-popup">
+            <button id="close-form-button">X</button>
+            <p>Enter the Book Data:</p>
+            <form action="">
+                <label for="">Title</label><input type="text">
+                <label for="">Author</label><input type="text">
+                <label for="">Pages</label><input type="text">
+                <div><label for="">Read</label><input type="checkbox"></div>
+                
+                <button>SUBMIT</button>
+            </form>
+        </dialog>
+
+    </section>
 
 </body>
 </html>

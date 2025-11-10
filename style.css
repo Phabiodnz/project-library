@@ -1,10 +1,43 @@
-.library-container{
-     border: 2px solid rgb(255, 0, 0);
+.hidden {
+  display: none !important;
+}
+
+dialog{
+    width: 250px;
+    height: 325px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.middle-section{
+    border: 2px solid rgb(255, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.form-container{
+    border: 2px solid rgb(255, 0, 0);
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50vw;
     height: 50vh;
+}
+
+.library-container{
+    border: 2px solid rgb(255, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    height: 75%;
 }
 
 .book-card{
