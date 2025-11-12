@@ -1,6 +1,19 @@
-//Universal Constants
-const myLibrary = [];
+//Universal Variables/Constants
+let myLibrary = [];
 const libraryContainer = document.querySelector(".library-container");
+
+//Book Constructor
+function Book(title,author,pages,status){
+    if(!new.target) {
+        throw Error("You must use the 'new' operator to call the constructor");
+    }
+
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
+    this.id = crypto.randomUUID();
+}
 
 //Add Book Variables/Constants
 const showBookFormBtn = document.getElementById("show-form-button");
@@ -33,19 +46,6 @@ form.addEventListener("submit", (e) => {
   form.reset();
 });
 
-//Book Constructor
-function Book(title,author,pages,status){
-    if(!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
-    }
-
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
-    this.id = crypto.randomUUID();
-}
-
 //Adds a book to the library
 function addBookToLibrary(book) {
     if (!(book instanceof Book)) {
@@ -56,39 +56,61 @@ function addBookToLibrary(book) {
 
 // Creates a card for each book in the library
 function displayLibrary() {
-    libraryContainer.innerHTML = "";
+  libraryContainer.innerHTML = "";
 
-    myLibrary.forEach((book) => {
-        const bookDiv = document.createElement("div");
-        bookDiv.classList.add("book-card");
+  myLibrary.forEach((book) => {
+    const bookDiv = document.createElement("div");
+    bookDiv.classList.add("book-card");
+    bookDiv.dataset.id = book.id;
 
-        const bookTitle = document.createElement("p");
-        bookTitle.classList.add("book-title");
-        bookTitle.textContent = book.title;
-        bookDiv.appendChild(bookTitle);
+    // DELETE button
+    const deleteBookBtn = document.createElement("button");
+    deleteBookBtn.textContent = "REMOVE";
+    deleteBookBtn.classList.add("delete-book-button");
+    bookDiv.appendChild(deleteBookBtn);
 
-        const bookAuthor = document.createElement("p");
-        bookAuthor.classList.add("book-author");
-        bookAuthor.textContent = book.author;
-        bookDiv.appendChild(bookAuthor);
-
-        const bookPages = document.createElement("p");
-        bookPages.classList.add("book-pages");
-        bookPages.textContent = `${book.pages} pages`;
-        bookDiv.appendChild(bookPages);
-
-        const bookStatus = document.createElement("p");
-        bookStatus.classList.add("book-status");
-        bookStatus.textContent = book.status;
-        bookDiv.appendChild(bookStatus);
-
-        const bookId = document.createElement("p");
-        bookId.classList.add("book-id");
-        bookId.textContent = `ID: ${book.id}`;
-        bookDiv.appendChild(bookId);
-
-        libraryContainer.appendChild(bookDiv);
+    deleteBookBtn.addEventListener("click", () => {
+      myLibrary = myLibrary.filter(b => b.id !== book.id);
+      displayLibrary();
     });
+
+    // CHANGE STATUS button
+    const markBookBtn = document.createElement("button");
+    markBookBtn.textContent = "CHANGE STATUS";
+    markBookBtn.classList.add("mark-book-button");
+    bookDiv.appendChild(markBookBtn);
+
+    markBookBtn.addEventListener("click", () => {
+      book.status = book.status === "READ" ? "NOT READ" : "READ";
+      displayLibrary();
+    });
+
+    // Card Elements
+    const bookTitle = document.createElement("p");
+    bookTitle.classList.add("book-title");
+    bookTitle.textContent = book.title;
+
+    const bookAuthor = document.createElement("p");
+    bookAuthor.classList.add("book-author");
+    bookAuthor.textContent = book.author;
+
+    const bookPages = document.createElement("p");
+    bookPages.classList.add("book-pages");
+    bookPages.textContent = `${book.pages} pages`;
+
+    const bookStatus = document.createElement("p");
+    bookStatus.classList.add("book-status");
+    bookStatus.textContent = book.status;
+
+    const bookId = document.createElement("p");
+    bookId.classList.add("book-id");
+    bookId.textContent = `ID: ${book.id}`;
+
+    bookDiv.append(bookTitle, bookAuthor, bookPages, bookStatus, bookId);
+
+    // append everything
+    libraryContainer.appendChild(bookDiv);
+  });
 }
 
 const book1 = new Book("The Silent Ocean", "Maria Lopes", 250, "read");
@@ -98,5 +120,7 @@ const book3 = new Book("Echoes of Tomorrow", "Lívia Souza", 320, "not read yet"
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
+
+console.log(book3.id)
 
 displayLibrary();

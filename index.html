@@ -10,7 +10,6 @@
     <script src="script.js" defer></script>
 
     <section class="middle-section">
-        
         <div class="library-container">
         </div>
 
@@ -20,15 +19,13 @@
             <button id="close-form-button">X</button>
             <p>Enter the Book Data:</p>
             <form action="">
-                <label for="new-book-title">Title</label><input type="text" id="new-book-title">
-                <label for="new-book-author">Author</label><input type="text" id="new-book-author">
-                <label for="new-book-pages">Pages</label><input type="text" id="new-book-pages">
+                <label for="new-book-title">Title</label><input type="text" id="new-book-title" required>
+                <label for="new-book-author">Author</label><input type="text" id="new-book-author" required>
+                <label for="new-book-pages">Pages</label><input type="text" id="new-book-pages" required>
                 <div><label for="new-book-status">Read</label><input type="checkbox" id="new-book-status"></div>
                 <button>SUBMIT</button>
             </form>
         </dialog>
-
     </section>
-
 </body>
 </html>
